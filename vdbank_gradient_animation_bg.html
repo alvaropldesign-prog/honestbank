@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8" />
+
+<meta
+
+  name="viewport"
+
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+
+/>
+
+<title>VDBank</title>
+
+<link
+
+  rel="stylesheet"
+
+  href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+
+/>
+
+<link
+
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+
+  rel="stylesheet"
+
+/>
+
+<style>
+
+*{
+
+  margin:0;
+
+  padding:0;
+
+  box-sizing:border-box;
+
+}
+
+:root{
+
+  --text:#f3f4f6;
+
+  --muted:rgba(255,255,255,.6);
+
+  --lime:#b5ff4d;
+
+  --green:#22c55e;
+
+  --red:#ff6060;
+
+  --surface:rgba(255,255,255,.08);
+
+  --border:rgba(255,255,255,.12);
+
+}
+
+html,
+
+body{
+
+  width:100%;
+
+  height:100%;
+
+  overflow:hidden;
+
+  background:#050816;
+
+  font-family:'Roboto',sans-serif;
+
+}
+
+body{
+
+  margin:0;
+
+}
+
+#app{
+
+  position:relative;
+
+  width:100vw;
+
+  height:100dvh;
+
+  overflow:hidden;
+
+  color:var(--text);
+
+}
+
+/* ─────────────────────────────
+
+   BACKGROUND
+
+───────────────────────────── */
+
+#bg{
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+    radial-gradient(circle at 20% 20%, rgba(120,80,255,.45), transparent 35%),
+
+    radial-gradient(circle at 80% 30%, rgba(0,140,255,.28), transparent 35%),
+
+    radial-gradient(circle at 50% 80%, rgba(0,255,160,.12), transparent 35%),
+
+    linear-gradient(145deg,#090b1d,#081325 60%,#07192f);
+
+  overflow:hidden;
+
+}
+
+.orb{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  filter:blur(80px);
+
+  opacity:.5;
+
+}
+
+.o1{
+
+  width:280px;
+
+  height:280px;
+
+  background:#7c3aed;
+
+  top:-80px;
+
+  left:-80px;
+
+}
+
+.o2{
+
+  width:240px;
+
+  height:240px;
+
+  background:#2563eb;
+
+  right:-60px;
+
+  top:140px;
+
+}
+
+.o3{
+
+  width:240px;
+
+  height:240px;
+
+  background:#22c55e;
+
+  bottom:-100px;
+
+  left:40%;
+
+}
+
+/* ─────────────────────────────
+
+   APP
+
+───────────────────────────── */
+
+.screen{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  z-index:2;
+
+}
+
+.nav{
+
+  padding:
+
+    calc(env(safe-area-inset-top) + 16px)
+
+    18px
+
+    16px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+.logo{
+
+  font-size:20px;
+
+  font-weight:700;
+
+}
+
+.logo span{
+
+  color:var(--lime);
+
+}
+
+.avatar{
+
+  width:36px;
+
+  height:36px;
+
+  border-radius:50%;
+
+  background:var(--lime);
+
+  color:#111;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+.body{
+
+  flex:1;
+
+  overflow-y:auto;
+
+  -webkit-overflow-scrolling:touch;
+
+  padding:
+
+    10px
+
+    16px
+
+    calc(env(safe-area-inset-bottom) + 30px);
+
+}
+
+/* ─────────────────────────────
+
+   HERO
+
+───────────────────────────── */
+
+.eyebrow{
+
+  font-size:11px;
+
+  letter-spacing:1.6px;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-bottom:8px;
+
+}
+
+.hero{
+
+  font-size:32px;
+
+  line-height:1.15;
+
+  font-weight:300;
+
+  margin-bottom:24px;
+
+}
+
+.hero span{
+
+  color:var(--lime);
+
+  font-style:italic;
+
+  font-weight:700;
+
+}
+
+/* ─────────────────────────────
+
+   ALERT
+
+───────────────────────────── */
+
+.alert-banner{
+
+  position:relative;
+
+  overflow:hidden;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+  padding:16px;
+
+  margin-bottom:24px;
+
+  border-radius:18px;
+
+  border:1px solid rgba(120,255,120,0.16);
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      rgba(210,255,170,0.92),
+
+      rgba(180,255,210,0.88)
+
+    );
+
+  color:#111;
+
+  isolation:isolate;
+
+}
+
+.alert-grid{
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:.35;
+
+  z-index:-1;
+
+  background-image:
+
+    linear-gradient(rgba(0,0,0,.08) 1px, transparent 1px),
+
+    linear-gradient(90deg, rgba(0,0,0,.08) 1px, transparent 1px);
+
+  background-size:14px 14px;
+
+  mask-image:linear-gradient(
+
+    90deg,
+
+    black,
+
+    transparent
+
+  );
+
+}
+
+.alert-content{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:12px;
+
+}
+
+.alert-icon{
+
+  width:38px;
+
+  height:38px;
+
+  flex-shrink:0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.55);
+
+  border:1px solid rgba(0,120,0,.22);
+
+  color:#14532d;
+
+  font-size:18px;
+
+}
+
+.alert-title{
+
+  font-size:13px;
+
+  font-weight:700;
+
+  margin-bottom:4px;
+
+  color:#111827;
+
+}
+
+.alert-desc{
+
+  font-size:13px;
+
+  line-height:1.45;
+
+  color:#1f2937;
+
+}
+
+.alert-action{
+
+  width:100%;
+
+  min-height:44px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:rgba(255,255,255,.45);
+
+  font-size:13px;
+
+  font-weight:500;
+
+  color:#111827;
+
+}
+
+.alert-close{
+
+  position:absolute;
+
+  top:10px;
+
+  right:10px;
+
+  width:28px;
+
+  height:28px;
+
+  border:none;
+
+  background:none;
+
+  color:#166534;
+
+}
+
+/* ─────────────────────────────
+
+   CARDS
+
+───────────────────────────── */
+
+.section-title{
+
+  font-size:11px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.8px;
+
+  color:var(--muted);
+
+  margin-bottom:12px;
+
+}
+
+.card{
+
+  width:100%;
+
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:16px;
+
+  backdrop-filter:blur(20px);
+
+  margin-bottom:14px;
+
+}
+
+.card-top{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+  margin-bottom:16px;
+
+}
+
+.acc-tag{
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  color:var(--muted);
+
+  margin-bottom:4px;
+
+}
+
+.acc-name{
+
+  font-size:15px;
+
+  font-weight:500;
+
+}
+
+.acc-num{
+
+  margin-top:4px;
+
+  font-size:11px;
+
+  color:var(--muted);
+
+}
+
+.bal{
+
+  font-size:34px;
+
+  font-weight:300;
+
+  letter-spacing:-1px;
+
+}
+
+.bal.lime{
+
+  color:var(--lime);
+
+}
+
+.stats{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+
+  margin-bottom:14px;
+
+}
+
+.stat{
+
+  background:rgba(0,0,0,.2);
+
+  border-radius:12px;
+
+  padding:11px 12px;
+
+}
+
+.stat-l{
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-bottom:4px;
+
+}
+
+.stat-v{
+
+  font-size:14px;
+
+  font-weight:500;
+
+}
+
+.pos{
+
+  color:var(--green);
+
+}
+
+.neg{
+
+  color:var(--red);
+
+}
+
+.lime{
+
+  color:var(--lime);
+
+}
+
+.card-foot{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:12px;
+
+}
+
+.pill{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  font-size:11px;
+
+  color:var(--green);
+
+}
+
+.link-btn{
+
+  width:100%;
+
+  min-height:46px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.08);
+
+  color:white;
+
+  font-size:13px;
+
+  font-weight:500;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="bg">
+
+  <div class="orb o1"></div>
+
+  <div class="orb o2"></div>
+
+  <div class="orb o3"></div>
+
+</div>
+
+<div id="app">
+
+  <div class="screen">
+
+    <nav class="nav">
+
+      <div class="logo">
+
+        <span>VD</span> Honest Bank
+
+      </div>
+
+      <div class="avatar">
+
+        AL
+
+      </div>
+
+    </nav>
+
+    <div class="body">
+
+      <div class="eyebrow">
+
+        Viernes, 29 de mayo
+
+      </div>
+
+      <div class="hero">
+
+        Buenos días,<br>
+
+        <span>Alejandro.</span>
+
+      </div>
+
+      <!-- ALERT -->
+
+      <div class="alert-banner">
+
+        <div class="alert-grid"></div>
+
+        <div class="alert-content">
+
+          <div class="alert-icon">
+
+            <i class="ti ti-shield-lock"></i>
+
+          </div>
+
+          <div>
+
+            <div class="alert-title">
+
+              Cargo próximo · 5 de junio
+
+            </div>
+
+            <div class="alert-desc">
+
+              Tu seguro de vida realizará un cargo de
+
+              <strong>€48,90</strong>
+
+              en la cuenta corriente (••••4821).
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <button class="alert-action">
+
+          Ver detalle
+
+        </button>
+
+        <button class="alert-close">
+
+          <i class="ti ti-x"></i>
+
+        </button>
+
+      </div>
+
+      <!-- CARDS -->
+
+      <div class="section-title">
+
+        Mis cuentas
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+
+          <div>
+
+            <div class="acc-tag">
+
+              Cuenta personal
+
+            </div>
+
+            <div class="acc-name">
+
+              Cuenta corriente
+
+            </div>
+
+            <div class="acc-num">
+
+              IBAN ••••4821 · Bankinter
+
+            </div>
+
+          </div>
+
+          <div class="bal">
+
+            €4.230,15
+
+          </div>
+
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+
+            <div class="stat-l">
+
+              Este mes
+
+            </div>
+
+            <div class="stat-v neg">
+
+              −€312,45
+
+            </div>
+
+          </div>
+
+          <div class="stat">
+
+            <div class="stat-l">
+
+              Ingresos
+
+            </div>
+
+            <div class="stat-v pos">
+
+              +€2.400
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card-foot">
+
+          <div class="pill">
+
+            <i class="ti ti-trending-up"></i>
+
+            +€212,30 vs mes anterior
+
+          </div>
+
+          <button class="link-btn">
+
+            Ver historial
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- CARD 2 -->
+
+      <div class="card">
+
+        <div class="card-top">
+
+          <div>
+
+            <div class="acc-tag">
+
+              Inversión
+
+            </div>
+
+            <div class="acc-name">
+
+              Cartera diversificada
+
+            </div>
+
+            <div class="acc-num">
+
+              ETF Global · IWDA
+
+            </div>
+
+          </div>
+
+          <div class="bal lime">
+
+            €12.840
+
+          </div>
+
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+
+            <div class="stat-l">
+
+              Rentabilidad
+
+            </div>
+
+            <div class="stat-v lime">
+
+              +10,7%
+
+            </div>
+
+          </div>
+
+          <div class="stat">
+
+            <div class="stat-l">
+
+              Ganancias
+
+            </div>
+
+            <div class="stat-v pos">
+
+              +€1.240
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card-foot">
+
+          <div class="pill">
+
+            <i class="ti ti-chart-bar"></i>
+
+            +4,2% este mes
+
+          </div>
+
+          <button class="link-btn">
+
+            Ver cartera
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+
+</html>
